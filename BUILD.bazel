@@ -1,0 +1,14 @@
+load("@build_bazel_rules_apple//apple:ios.bzl", "ios_application")
+
+ios_application(
+    name = "HermesiOSApp",
+    bundle_id = "build.bazel.Hermes-Beta",
+    families = [
+        "iphone",
+        "ipad",
+    ],
+    infoplists = ["resources/info.plist"],
+    minimum_os_version = "17.0",
+    visibility = ["//visibility:public"],
+    deps = ["//src:bazel_app_lib"],
+)
