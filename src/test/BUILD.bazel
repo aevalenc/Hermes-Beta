@@ -1,0 +1,13 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library", "swift_test")
+
+swift_library(
+    name = "sample_library_tests",
+    srcs = ["sample_library_tests.swift"],
+    deps = ["//src:sample_library"],
+)
+
+swift_test(
+    name = "sample_library_swift_tests",
+    srcs = ["sample_library_tests.swift"],
+    deps = ["//src:sample_library"],
+)

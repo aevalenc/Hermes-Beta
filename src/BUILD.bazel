@@ -1,0 +1,14 @@
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+
+swift_library(
+    name = "sample_library",
+    srcs = ["sample_library.swift"],
+    visibility = ["//visibility:public"],
+)
+
+swift_library(
+    name = "hermes_app_lib",
+    srcs = ["HermesMainApp.swift"],
+    visibility = ["//visibility:public"],
+    deps = [":sample_library"],
+)
