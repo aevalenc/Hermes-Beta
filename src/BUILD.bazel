@@ -1,4 +1,6 @@
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_library")
+load("@build_bazel_rules_swift//swift:swift_interop_hint.bzl", "swift_interop_hint")
+load("@rules_cc//cc:defs.bzl", "cc_library")
 
 swift_library(
     name = "sample_library",
@@ -9,6 +11,21 @@ swift_library(
 swift_library(
     name = "hermes_app_lib",
     srcs = ["HermesMainApp.swift"],
+    copts = ["-cxx-interoperability-mode=default"],
     visibility = ["//visibility:public"],
-    deps = [":sample_library"],
+    # deps = [":sample_library"],
+    deps = [":print_hello"],
+)
+
+cc_library(
+    name = "print_hello",
+    srcs = ["print_hello.cpp"],
+    hdrs = ["print_hello.h"],
+    aspect_hints = [":print_hello_swift_hint"],
+    visibility = ["//visibility:public"],
+)
+
+swift_interop_hint(
+    name = "print_hello_swift_hint",
+    module_name = "PrintHello",
 )
