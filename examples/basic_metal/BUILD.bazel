@@ -1,0 +1,13 @@
+load("@build_bazel_rules_apple//apple:resources.bzl", "apple_metal_library")
+load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
+
+apple_metal_library(
+    name = "add_arrays_metal",
+    srcs = ["add_arrays.metal"],
+)
+
+swift_binary(
+    name = "main",
+    srcs = ["main.swift"],
+    data = [":add_arrays_metal"],
+)
