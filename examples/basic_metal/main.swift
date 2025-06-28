@@ -2,7 +2,7 @@ import MetalKit
 
 let count: Int = 5
 
-var array_1: [Double] = [1.0, 2.0, 3.0, 4.0, 5.0]
+var array_1: [Float] = [1.0, 2.0, 3.0, 4.0, 5.0]
 var array_2 = [Float](repeating: 2.0, count: count)
 // var result
 
@@ -47,10 +47,12 @@ let resultBuff = device?.makeBuffer(
   length: MemoryLayout<Float>.size * count,
   options: .storageModeShared)
 
+print("GPU Buffers Created")
+
 // Create a buffer to be sent to the command queue
 let commandBuffer = commandQueue?.makeCommandBuffer()
 
-// Create an encoder to set vaulues on the compute function
+// Create an encoder to set vaules on the compute function
 let commandEncoder = commandBuffer?.makeComputeCommandEncoder()
 commandEncoder?.setComputePipelineState(additionComputePipelineState)
 
@@ -82,7 +84,7 @@ var resultBufferPointer = resultBuff?.contents().bindMemory(
   capacity: MemoryLayout<Float>.size * count)
 
 // Print out all of our new added together array information
-for i in 0..<3 {
+for i in 0..<count {
   print("\(array_1[i]) + \(array_2[i]) = \(Float(resultBufferPointer!.pointee) as Any)")
   resultBufferPointer = resultBufferPointer?.advanced(by: 1)
 }
