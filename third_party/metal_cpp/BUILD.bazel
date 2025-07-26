@@ -1,0 +1,5 @@
+alias(
+    name = "metal_cpp",
+    actual = "@metal_cpp_headers",
+    visibility = ["//visibility:public"],
+)
