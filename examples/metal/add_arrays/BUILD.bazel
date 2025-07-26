@@ -1,3 +1,4 @@
+load("@build_bazel_rules_apple//apple:apple.bzl", "apple_universal_binary")
 load("@build_bazel_rules_apple//apple:resources.bzl", "apple_metal_library")
 load("@build_bazel_rules_swift//swift:swift.bzl", "swift_binary")
 
@@ -10,4 +11,10 @@ swift_binary(
     name = "main",
     srcs = ["main.swift"],
     data = [":add_arrays_metal"],
+)
+
+apple_universal_binary(
+    name = "main_mm",
+    srcs = ["main.mm"],
+    minimum_ios_version = "13.0",
 )
