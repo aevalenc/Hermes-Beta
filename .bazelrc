@@ -1,14 +1,2 @@
 # MacOS
-build:macos --cxxopt=-std=c++17
-build:macos --host_cxxopt=-std=c++17
-build:macos --copt=-w
-build:macos --define=xnn_enable_avx512amx=false
-
-build:darwin_arm64 --apple_platform_type=macos
-build:darwin_arm64 --macos_minimum_os=10.16
-build:darwin_arm64 --cpu=darwin_arm64
-
-# Mac OS toolchain configurations
-# clang 18 configurations
-build:clang18_macos_aarch64 --extra_toolchains=//bazel/toolchains/clang18:clang18_toolchain_for_macos_aarch64 --incompatible_enable_cc_toolchain_resolution
-build:clang18_macos_aarch64 --copt="-std=c++17" --copt="-Wall"
+build:metal --linkopt='-framework' --linkopt='Metal' --linkopt='-framework' --linkopt='Foundation'
