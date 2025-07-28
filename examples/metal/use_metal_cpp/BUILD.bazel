@@ -3,9 +3,6 @@ load("@rules_cc//cc:defs.bzl", "cc_binary")
 cc_binary(
     name = "main",
     srcs = ["main.cpp"],
-    deps = [
-        # "//examples/metal/add_arrays:add_arrays_metal",
-        "//third_party/metal_cpp",
-        # ":Metal",
-    ],
+    data = ["//examples/metal/add_arrays:add_arrays_metal"],
+    deps = ["//third_party/metal_cpp"],
 )
