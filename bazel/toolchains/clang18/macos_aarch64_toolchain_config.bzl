@@ -126,6 +126,30 @@ def _impl(ctx):
         ],
     )
 
+    metal_cpp_feature = feature(
+        name = "metal_cpp",
+        enabled = False,
+        flag_sets = [
+            flag_set(
+                actions = all_link_actions,
+                flag_groups = ([
+                    flag_group(
+                        flags = [
+                            "-framework",
+                            "Metal",
+                            "-framework",
+                            "MetalKit",
+                            "-framework",
+                            "QuartzCore",
+                            "-framework",
+                            "Foundation",
+                        ],
+                    ),
+                ]),
+            ),
+        ],
+    )
+
     return cc_common.create_cc_toolchain_config_info(
         ctx = ctx,
         cxx_builtin_include_directories = [
@@ -133,7 +157,7 @@ def _impl(ctx):
             BREW_CELLAR_LLVM_PATH,
             SDK_PATH,
         ],
-        features = [ar_flags_feature, default_feature],
+        features = [ar_flags_feature, default_feature, metal_cpp_feature],
         toolchain_identifier = "local",
         host_system_name = "local",
         target_system_name = "local",
