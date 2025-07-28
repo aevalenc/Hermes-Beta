@@ -1,0 +1,22 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+
+cc_library(
+    name = "Metal",
+    linkopts = ["-framework Metal"],
+)
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cpp"],
+    linkopts = [
+        "-framework Metal",
+        "-framework MetalKit",
+        "-framework QuartzCore",
+        "-framework Foundation",
+    ],
+    deps = [
+        # "//examples/metal/add_arrays:add_arrays_metal",
+        "//third_party/metal_cpp",
+        # ":Metal",
+    ],
+)
